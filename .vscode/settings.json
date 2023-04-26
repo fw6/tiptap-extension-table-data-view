@@ -1,0 +1,94 @@
+{
+    "stylelint.enable": true,
+    "stylelint.validate": [
+        "html",
+        "vue",
+        "svelte",
+        "astro",
+    ],
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "svelte"
+    ],
+    "npm.packageManager": "pnpm",
+    "search.exclude": {
+        "**/.git": true,
+        "**/.github": true,
+        "**/.nuxt": true,
+        "**/.output": true,
+        "**/.pnpm": true,
+        "**/.vscode": true,
+        "**/.yarn": true,
+        "**/bower_components": true,
+        "**/dist/**": true,
+        "**/logs": true,
+        "**/node_modules": true,
+        "**/out/**": true,
+        "**/package-lock.json": true,
+        "**/pnpm-lock.yaml": true,
+        "**/tmp": true,
+        "**/dist": true,
+        "**/yarn.lock": true,
+    },
+    "cSpell.words": [
+        "astro",
+        "devkit",
+        "dndzone",
+        "esbuild",
+        "histoire",
+        "iconify",
+        "idcard",
+        "invisibles",
+        "litmirror",
+        "lmds",
+        "maska",
+        "mdast",
+        "nrwl",
+        "numfmt",
+        "nxext",
+        "qiyuesuo",
+        "stylelintrc",
+        "sveltejs",
+        "tabler",
+        "tiptap",
+        "tsbuildinfo",
+        "tsdoc",
+        "unist",
+        "unplugin",
+        "vueuse",
+        "WUJIE"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    // https://github.com/sveltejs/language-tools/blob/master/packages/svelte-vscode/package.json
+    "svelte.enable-ts-plugin": true,
+    // FIXME: 垃圾prettier！printWidth不生效、换行位置很难看，暂时先关掉，移除prettier后再开启（singleAttributePerLine 配置暂不支持）
+    // "svelte.plugin.svelte.format.enable": false,
+    "svelte.plugin.svelte.format.config.printWidth": 999,
+    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    "svelte.plugin.svelte.compilerWarnings": {
+        "a11y-click-events-have-key-events": "ignore"
+    },
+    "emmet.includeLanguages": {
+        "postcss": "css"
+    },
+    "files.associations": {
+        "*.postcss": "css",
+        "*.pcss": "css"
+    },
+    "editor.suggest.showVariables": true
+}

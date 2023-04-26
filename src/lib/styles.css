@@ -1,0 +1,462 @@
+@font-face {
+    font-family: 雅黑;
+    src: local("Microsoft YaHei"), local("WenQuanYi Micro Hei"), local("sans-serif"), local("app color emoji"), local("segoe ui emoji"), local("segoe ui symbol");
+  }
+  @font-face {
+    font-family: BASE;
+    src: local("Helvetica"), local("Tahoma"), local("Arial"), local("PingFang SC"), local("Hiragino Sans GB"), local("Heiti SC"), local("Microsoft YaHei"), local("WenQuanYi Micro Hei"), local("sans-serif"), local("app color emoji"), local("segoe ui emoji"), local("segoe ui symbol");
+  }
+  .ProseMirror {
+    outline: none;
+    word-break: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: break-spaces;
+    font-family: 雅黑;
+    font-size: 12px;
+    /* == Param Nodes ======================================== */
+    /* == ParamText Nodes ======================================== */
+    /* == LayoutSection Nodes ======================================== */
+  }
+  .ProseMirror p {
+    margin: 0;
+    line-height: 1.5714;
+  }
+  .ProseMirror ul,
+  .ProseMirror ol {
+    padding: 0 1rem;
+  }
+  .ProseMirror code {
+    color: rgb(232, 62, 140);
+    border-radius: 2px;
+    padding: 2px;
+    margin: 0 1px;
+    border: 1px solid rgba(192, 192, 192, 0.5);
+  }
+  .ProseMirror pre {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+  .ProseMirror pre code {
+    color: inherit;
+    padding: 0;
+    background: none;
+    font-size: 0.8rem;
+  }
+  .ProseMirror mark {
+    background-color: #faf594;
+  }
+  .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+  }
+  .ProseMirror blockquote {
+    border-left: 2px solid var(--ds-border, #DFE1E6);
+    margin: 0.75rem 0 0;
+    padding-left: 1rem;
+    clear: both;
+  }
+  .ProseMirror blockquote::before {
+    float: left;
+    width: 1em;
+    margin-left: -1rem;
+    text-align: right;
+    content: "";
+  }
+  .ProseMirror .highlightblock {
+    border: 1px solid transparent;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+  .ProseMirror .highlightblock p {
+    color: inherit;
+    padding: 0;
+    background: none;
+  }
+  .ProseMirror ul[data-type=taskList] {
+    list-style: none;
+    padding: 0;
+  }
+  .ProseMirror ul[data-type=taskList] li {
+    display: flex;
+    align-items: center;
+  }
+  .ProseMirror ul[data-type=taskList] li > label {
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+    user-select: none;
+  }
+  .ProseMirror ul[data-type=taskList] li > div {
+    flex: 1 1 auto;
+  }
+  .ProseMirror ol {
+    padding: 0 1.5rem;
+    counter-reset: count;
+  }
+  .ProseMirror ol li {
+    counter-increment: count;
+  }
+  .ProseMirror ol[data-serial-type=decimal] li::marker {
+    content: counter(count, decimal) ". ";
+  }
+  .ProseMirror ol[data-serial-type=decimal-leading-zero] li::marker {
+    content: counter(count, decimal-leading-zero) ". ";
+  }
+  .ProseMirror ol[data-serial-type=lower-greek] li::marker {
+    content: counter(count, lower-greek) ". ";
+  }
+  .ProseMirror ol[data-serial-type=cjk-decimal] li::marker {
+    content: counter(count, cjk-decimal) ". ";
+  }
+  .ProseMirror ol[data-serial-type=cjk-heavenly-stem] li::marker {
+    content: counter(count, cjk-heavenly-stem) ". ";
+  }
+  .ProseMirror ol[data-serial-type=korean-hanja-formal] li::marker {
+    content: counter(count, korean-hanja-formal) ". ";
+  }
+  .ProseMirror ol[data-serial-type=upper-roman] li::marker {
+    content: counter(count, upper-roman) ". ";
+  }
+  .ProseMirror ol[data-serial-type=lower-roman] li::marker {
+    content: counter(count, lower-roman) ". ";
+  }
+  .ProseMirror ol[data-serial-type=upper-alpha] li::marker {
+    content: counter(count, upper-alpha) ". ";
+  }
+  .ProseMirror ol[data-serial-type=lower-alpha] li::marker {
+    content: counter(count, lower-alpha) ". ";
+  }
+  .ProseMirror div[data-serial-type=decimal] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=decimal] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=decimal] div[list-item]::marker {
+    content: counter(list-counter, decimal) ". ";
+  }
+  .ProseMirror div[data-serial-type=decimal-leading-zero] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=decimal-leading-zero] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=decimal-leading-zero] div[list-item]::marker {
+    content: counter(list-counter, decimal-leading-zero) ". ";
+  }
+  .ProseMirror div[data-serial-type=lower-greek] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=lower-greek] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=lower-greek] div[list-item]::marker {
+    content: counter(list-counter, lower-greek) ". ";
+  }
+  .ProseMirror div[data-serial-type=cjk-decimal] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=cjk-decimal] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=cjk-decimal] div[list-item]::marker {
+    content: counter(list-counter, cjk-decimal) ". ";
+  }
+  .ProseMirror div[data-serial-type=cjk-heavenly-stem] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=cjk-heavenly-stem] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=cjk-heavenly-stem] div[list-item]::marker {
+    content: counter(list-counter, cjk-heavenly-stem) ". ";
+  }
+  .ProseMirror div[data-serial-type=korean-hanja-formal] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=korean-hanja-formal] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=korean-hanja-formal] div[list-item]::marker {
+    content: counter(list-counter, korean-hanja-formal) ". ";
+  }
+  .ProseMirror div[data-serial-type=upper-roman] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=upper-roman] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=upper-roman] div[list-item]::marker {
+    content: counter(list-counter, upper-roman) ". ";
+  }
+  .ProseMirror div[data-serial-type=lower-roman] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=lower-roman] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=lower-roman] div[list-item]::marker {
+    content: counter(list-counter, lower-roman) ". ";
+  }
+  .ProseMirror div[data-serial-type=upper-alpha] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=upper-alpha] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=upper-alpha] div[list-item]::marker {
+    content: counter(list-counter, upper-alpha) ". ";
+  }
+  .ProseMirror div[data-serial-type=lower-alpha] {
+    padding: 0 1.5rem;
+    counter-reset: list-counter;
+  }
+  .ProseMirror div[data-serial-type=lower-alpha] div[list-item] {
+    display: list-item;
+    counter-increment: list-counter;
+  }
+  .ProseMirror div[data-serial-type=lower-alpha] div[list-item]::marker {
+    content: counter(list-counter, lower-alpha) ". ";
+  }
+  .ProseMirror div[bullet-type=disc] {
+    padding: 0 1.5rem;
+  }
+  .ProseMirror div[bullet-type=disc] div[list-item] {
+    display: list-item;
+    list-style-type: disc;
+  }
+  .ProseMirror div[bullet-type=circle] {
+    padding: 0 1.5rem;
+  }
+  .ProseMirror div[bullet-type=circle] div[list-item] {
+    display: list-item;
+    list-style-type: circle;
+  }
+  .ProseMirror div[bullet-type=square] {
+    padding: 0 1.5rem;
+  }
+  .ProseMirror div[bullet-type=square] div[list-item] {
+    display: list-item;
+    list-style-type: square;
+  }
+  .ProseMirror [data-page-break] {
+    page-break-after: always;
+  }
+  .ProseMirror [data-hr] {
+    padding: 4px 0;
+  }
+  .ProseMirror hr[hr-type=normal] {
+    border: 0;
+    border-top: 1px solid currentColor;
+  }
+  .ProseMirror hr[hr-type=dotted] {
+    border: 0;
+    border-top: 1px dotted currentColor;
+  }
+  .ProseMirror hr[hr-type=dashed] {
+    border: 0;
+    border-top: 1px dashed currentColor;
+  }
+  .ProseMirror hr[hr-type=dash-fixed] {
+    border: 0;
+    padding-top: 1px;
+    background: repeating-linear-gradient(to right, currentColor 0px, currentColor 4px, transparent 0px, transparent 10px);
+  }
+  .ProseMirror hr[hr-type=double] {
+    border: 0;
+    border-top: 3px double currentColor;
+  }
+  .ProseMirror hr[hr-type=weak] {
+    border: 0;
+    padding-top: 1px;
+    background: linear-gradient(to right, transparent, currentColor, transparent);
+  }
+  .ProseMirror hr[hr-type=mid-circle] {
+    border: 0;
+    height: unset;
+    background: linear-gradient(currentColor, currentColor) no-repeat center;
+    background-size: 100% 1px;
+  }
+  .ProseMirror hr[hr-type=mid-circle]::before {
+    content: " ";
+    display: block;
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: 50%;
+    background-color: currentColor;
+    margin: auto;
+  }
+  .ProseMirror hr[hr-type=mid-square] {
+    border: 0;
+    height: unset;
+    background: linear-gradient(currentColor, currentColor) no-repeat center;
+    background-size: 100% 1px;
+  }
+  .ProseMirror hr[hr-type=mid-square]::before {
+    content: "";
+    display: block;
+    width: 0.75em;
+    height: 0.75em;
+    transform: rotate(45deg);
+    background-color: currentColor;
+    margin: 3px auto;
+  }
+  .ProseMirror [lm-text-indent] {
+    text-indent: 2em;
+  }
+  .ProseMirror [lm-line-indent="1"] {
+    padding-left: 2em;
+  }
+  .ProseMirror [lm-line-indent="2"] {
+    padding-left: 4em;
+  }
+  .ProseMirror [lm-line-indent="3"] {
+    padding-left: 6em;
+  }
+  .ProseMirror [lm-line-indent="4"] {
+    padding-left: 8em;
+  }
+  .ProseMirror [lm-line-indent="5"] {
+    padding-left: 10em;
+  }
+  .ProseMirror [lm-line-indent="6"] {
+    padding-left: 12em;
+  }
+  .ProseMirror [lm-line-indent="7"] {
+    padding-left: 14em;
+  }
+  .ProseMirror [lm-line-indent="8"] {
+    padding-left: 16em;
+  }
+  .ProseMirror table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .ProseMirror table td,
+  .ProseMirror table th {
+    min-width: 1em;
+    border: 2px solid #ced4da;
+    padding: 3px 5px;
+    vertical-align: top;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .ProseMirror table td > *,
+  .ProseMirror table th > * {
+    margin-bottom: 0;
+  }
+  .ProseMirror table td[alignment|=middle],
+  .ProseMirror table th[alignment|=middle] {
+    vertical-align: middle;
+  }
+  .ProseMirror table td[alignment|=top],
+  .ProseMirror table th[alignment|=top] {
+    vertical-align: top;
+  }
+  .ProseMirror table td[alignment|=bottom],
+  .ProseMirror table th[alignment|=bottom] {
+    vertical-align: bottom;
+  }
+  .ProseMirror table td[alignment$=left],
+  .ProseMirror table th[alignment$=left] {
+    text-align: left;
+  }
+  .ProseMirror table td[alignment$=center],
+  .ProseMirror table th[alignment$=center] {
+    text-align: center;
+  }
+  .ProseMirror table td[alignment$=right],
+  .ProseMirror table th[alignment$=right] {
+    text-align: right;
+  }
+  .ProseMirror table th {
+    font-weight: bold;
+    text-align: left;
+    background-color: #f1f3f5;
+  }
+  .ProseMirror .prosemirror--decorator:before {
+    content: "";
+    color: #aaa;
+    position: absolute;
+  }
+  .ProseMirror [data-param] {
+    text-indent: initial;
+  }
+  .ProseMirror [data-param=text] {
+    display: inline;
+    min-width: 1em;
+    min-height: 1em;
+  }
+  .ProseMirror [data-param=raw] {
+    padding: 0 0.5rem;
+    border-radius: 0.125rem;
+    border: 1px dashed #e0e3e6;
+  }
+  .ProseMirror [data-layout-section] {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px -6px 0;
+    transition: border 0.3s ease-in;
+    cursor: pointer;
+  }
+  .ProseMirror [data-layout-section] [data-layout-column] {
+    flex: 1;
+    min-width: 0;
+    padding: 4px;
+  }
+  .ProseMirror [data-layout-section] [data-layout-column] [data-layout-content] {
+    height: 100%;
+  }
+  .ProseMirror [data-layout-section] [data-layout-column] + [data-layout-column] {
+    margin-left: 16px;
+  }
+  .ProseMirror [data-form-field=idcard] [data-idcard-item] {
+    width: 2em;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    border: 1px solid #e0e3e6;
+    aspect-ratio: 1/1;
+    text-align: center;
+  }
+  .ProseMirror [data-form-field=idcard] [data-idcard-item]::before {
+    content: "";
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+    padding-top: 100%;
+  }
+  .ProseMirror [data-form-field=idcard] [data-idcard-item]::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .ProseMirror [data-form-field=idcard] [data-idcard-item]:not(:first-child) {
+    margin-left: 0.25rem;
+  }
