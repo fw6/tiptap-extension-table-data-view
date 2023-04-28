@@ -1,6 +1,5 @@
 import { createColumnHelper, createTable, getCoreRowModel } from "@tanstack/table-core";
-import { FIELD_TYPE, type FieldConfig } from "../types";
-import type { DataSource } from "../types/data";
+import { FIELD_TYPE, type DataSource, type FieldConfig } from "../types";
 
 const columnHelper = createColumnHelper<DataSource[number]>();
 

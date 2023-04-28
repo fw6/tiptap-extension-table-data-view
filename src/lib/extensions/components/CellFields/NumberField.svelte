@@ -4,7 +4,7 @@
     import 'imask/esm/masked/number'
     import { onMount, tick } from 'svelte'
 
-    import type { DataType } from '../../types/data'
+    import type { DataType } from '../../types'
 
     export let editing = false
     export let info: CellContext<DataType[], DataType>
@@ -59,5 +59,6 @@
         padding: 0;
         font-size: inherit;
         font-family: inherit;
+        background-color: transparent;
     }
 </style>

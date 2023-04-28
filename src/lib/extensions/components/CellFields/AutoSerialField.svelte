@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { CellContext } from '@tanstack/table-core'
 
-    import type { DataType } from '../../types/data'
+    import type { DataType } from '../../types'
 
     export let info: CellContext<DataType[], DataType>
     export let editing = false

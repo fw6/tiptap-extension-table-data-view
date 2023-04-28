@@ -7,6 +7,7 @@ export const TableDataview = Node.create({
     atom: true,
     allowGapCursor: true,
     isolating: true,
+    draggable: false,
     parseHTML() {
         return [
             {

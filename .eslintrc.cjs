@@ -11,7 +11,10 @@ module.exports = {
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020
-	},
+    },
+    rules: {
+        '@typescript-eslint/no-empty-interface': 'off',
+    },
 	env: {
 		browser: true,
 		es2017: true,

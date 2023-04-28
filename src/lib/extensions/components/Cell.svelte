@@ -3,12 +3,8 @@
     import type { CellContext } from '@tanstack/table-core'
     import type { ComponentType, SvelteComponentTyped } from 'svelte'
 
-    import { FIELD_TYPE, type FieldConfig } from '../types'
-    import type { DataType } from '../types/data'
-    import AutoSerialCell from './Cells/AutoSerialCell.svelte'
-    import DatetimeCell from './Cells/DatetimeCell.svelte'
-    import NumberCell from './Cells/NumberCell.svelte'
-    import TextCell from './Cells/TextCell.svelte'
+    import { FIELD_TYPE, type DataType, type FieldConfig } from '../types'
+    import { AutoSerialField, DatetimeField, NumberField, TextField } from './CellFields'
 
     export let info: CellContext<DataType[], DataType>
 
@@ -27,16 +23,16 @@
         if (field) {
             switch (field.type) {
                 case FIELD_TYPE.AUTO_SERIAL:
-                    component = AutoSerialCell
+                    component = AutoSerialField
                     break
                 case FIELD_TYPE.TEXT:
-                    component = TextCell
+                    component = TextField
                     break
                 case FIELD_TYPE.NUMBER:
-                    component = NumberCell
+                    component = NumberField
                     break
                 case FIELD_TYPE.DATETIME:
-                    component = DatetimeCell
+                    component = DatetimeField
                     break
                 case FIELD_TYPE.SINGLE_SELECT:
                 case FIELD_TYPE.MULTI_SELECT:
@@ -69,7 +65,7 @@
     }
 </script>
 
-<td class="cell-stub" data-key={info.cell.id} class:active use:clickoutside on:clickoutside={onClickOutside} on:click={onClick}>
+<td class="cell-stub" data-cell-id={info.cell.id} data-row-id={info.row.id} data-column-id={info.column.id} class:active use:clickoutside on:clickoutside={onClickOutside} on:click={onClick}>
     <svelte:component this={component} {info} {editing} />
 </td>
 
@@ -90,6 +86,13 @@
                 background-color: blue;
                 box-shadow: 0 0 0px 0.5px white;
             }
+        }
+
+        :global(&.selected) {
+            background-color: pink;
+        }
+        :global(&.selected.selected-first) {
+            background-color: cyan;
         }
     }
 </style>

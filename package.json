@@ -30,6 +30,7 @@
         "@sveltejs/adapter-auto": "^2.0.0",
         "@sveltejs/kit": "^1.5.0",
         "@sveltejs/package": "^2.0.0",
+        "@types/lodash-es": "^4.17.7",
         "@types/postcss-mixins": "^9.0.0",
         "@types/postcss-preset-env": "^7.7.0",
         "@typescript-eslint/eslint-plugin": "^5.45.0",
@@ -112,8 +113,16 @@
         "@tiptap/starter-kit": "2.0.0-beta.220",
         "dayjs": "^1.11.7",
         "imask": "6.6.1-alpha.1",
+        "lodash-es": "^4.17.21",
         "maska": "^2.1.8",
         "mitt": "^3.0.0",
-        "moveable": "^0.45.0"
+        "moveable": "^0.45.0",
+        "nanoid": "^4.0.2",
+        "selecto": "^1.22.2"
+    },
+    "pnpm": {
+        "patchedDependencies": {
+            "@tanstack/table-core@8.8.5": "patches/@tanstack__table-core@8.8.5.patch"
+        }
     }
 }

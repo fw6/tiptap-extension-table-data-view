@@ -1,5 +1,4 @@
-import { FIELD_TYPE, type FieldConfig } from "../types"
-import type { DataSource } from "../types/data"
+import { FIELD_TYPE, type DataSource, type FieldConfig } from "../types"
 
 /**
  * 表格的数据，每一项代表一行，每一项的每一项代表一列。

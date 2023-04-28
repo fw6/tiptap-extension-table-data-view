@@ -6,7 +6,7 @@
     import { onMount } from 'svelte'
 
     import { tick } from 'svelte'
-    import type { DataType } from '../../types/data'
+    import type { DataType } from '../../types'
 
     export let info: CellContext<DataType[], DataType>
     export let editing = false
@@ -87,6 +87,7 @@
         padding: 0;
         font-size: inherit;
         font-family: inherit;
+        background-color: transparent;
 
         &:invalid {
             color: red;

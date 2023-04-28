@@ -1,12 +1,17 @@
 lockfileVersion: '6.0'
 
+patchedDependencies:
+  '@tanstack/table-core@8.8.5':
+    hash: yyya4xtydp542xyrhsc3uzdud4
+    path: patches/@tanstack__table-core@8.8.5.patch
+
 dependencies:
   '@svelte-put/clickoutside':
     specifier: ^2.0.0
     version: 2.0.0
   '@tanstack/table-core':
     specifier: ^8.8.5
-    version: 8.8.5
+    version: 8.8.5(patch_hash=yyya4xtydp542xyrhsc3uzdud4)
   '@tiptap/core':
     specifier: 2.0.0-beta.220
     version: 2.0.0-beta.220(@tiptap/pm@2.0.0-beta.220)
@@ -136,6 +141,9 @@ dependencies:
   imask:
     specifier: 6.6.1-alpha.1
     version: 6.6.1-alpha.1
+  lodash-es:
+    specifier: ^4.17.21
+    version: 4.17.21
   maska:
     specifier: ^2.1.8
     version: 2.1.8
@@ -145,6 +153,12 @@ dependencies:
   moveable:
     specifier: ^0.45.0
     version: 0.45.0
+  nanoid:
+    specifier: ^4.0.2
+    version: 4.0.2
+  selecto:
+    specifier: ^1.22.2
+    version: 1.22.2
 
 devDependencies:
   '@csstools/postcss-design-tokens':
@@ -165,6 +179,9 @@ devDependencies:
   '@sveltejs/package':
     specifier: ^2.0.0
     version: 2.0.0(svelte@3.54.0)(typescript@5.0.2)
+  '@types/lodash-es':
+    specifier: ^4.17.7
+    version: 4.17.7
   '@types/postcss-mixins':
     specifier: ^9.0.0
     version: 9.0.0
@@ -305,6 +322,12 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
+    dev: false
+
+  /@cfcs/core@0.0.6:
+    resolution: {integrity: sha512-FxfJMwoLB8MEMConeXUCqtMGqxdtePQxRBOiGip9ULcYYam3WfCgoY6xdnMaSkYvRvmosp5iuG+TiPofm65+Pw==}
+    dependencies:
+      '@egjs/component': 3.0.4
     dev: false
 
   /@csstools/cascade-layer-name-parser@1.0.2(@csstools/css-parser-algorithms@2.1.1)(@csstools/css-tokenizer@2.1.1):
@@ -609,6 +632,10 @@ packages:
     resolution: {integrity: sha512-DRvyqMf+CPCOzAopQKHtW+X8iN6Hy6SFol+/7zCUiE5y4P/OB8JP8FtU4NxtZwtafvSL4faD5KoQYPj3JHzPFQ==}
     dependencies:
       '@egjs/list-differ': 1.0.1
+    dev: false
+
+  /@egjs/component@3.0.4:
+    resolution: {integrity: sha512-sXA7bGbIeLF2OAw/vpka66c6QBBUPcA4UUhR4WGJfnp2XWdiI8QrnJGJMr/UxpE/xnevX9tN3jvNPlW8WkHl3g==}
     dev: false
 
   /@egjs/list-differ@1.0.1:
@@ -1078,10 +1105,11 @@ packages:
       - supports-color
     dev: true
 
-  /@tanstack/table-core@8.8.5:
+  /@tanstack/table-core@8.8.5(patch_hash=yyya4xtydp542xyrhsc3uzdud4):
     resolution: {integrity: sha512-Xnwa1qxpgvSW7ozLiexmKp2PIYcLBiY/IizbdGriYCL6OOHuZ9baRhrrH51zjyz+61ly6K59rmt6AI/3RR+97Q==}
     engines: {node: '>=12'}
     dev: false
+    patched: true
 
   /@tiptap/core@2.0.0-beta.220(@tiptap/pm@2.0.0-beta.220):
     resolution: {integrity: sha512-F2Q666xJqijBU5o+GqekqseNgIEMTs6BhsLDaf9DwThhljGLS8RXKnSvQxrxLNrYEPpw39n/G3Qt8YAOk5qR6w==}
@@ -1506,6 +1534,16 @@ packages:
 
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/lodash-es@4.17.7:
+    resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
+    dependencies:
+      '@types/lodash': 4.14.194
+    dev: true
+
+  /@types/lodash@4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
     dev: true
 
   /@types/object.omit@3.0.0:
@@ -2587,6 +2625,19 @@ packages:
     resolution: {integrity: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=}
     dev: true
 
+  /keycode@2.2.1:
+    resolution: {integrity: sha512-Rdgz9Hl9Iv4QKi8b0OlCRQEzp4AgVxyCtz5S/+VIHezDmrDhkp2N2TqBWOLz0/gbeREXOOiI9/4b8BY9uw2vFg==}
+    dev: false
+
+  /keycon@1.4.0:
+    resolution: {integrity: sha512-p1NAIxiRMH3jYfTeXRs2uWbVJ1WpEjpi8ktzUyBJsX7/wn2qu2VRXktneBLNtKNxJmlUYxRi9gOJt1DuthXR7A==}
+    dependencies:
+      '@cfcs/core': 0.0.6
+      '@daybrush/utils': 1.11.0
+      '@scena/event-emitter': 1.0.5
+      keycode: 2.2.1
+    dev: false
+
   /kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
@@ -2631,6 +2682,10 @@ packages:
     dependencies:
       p-locate: 5.0.0
     dev: true
+
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -2779,6 +2834,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
+
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /natural-compare-lite@1.4.0:
     resolution: {integrity: sha1-F7CVgZiJef3a/gIB6TG6kzyWy7Q=}
@@ -3828,6 +3889,21 @@ packages:
       mkdirp: 0.5.6
       rimraf: 2.7.1
     dev: true
+
+  /selecto@1.22.2:
+    resolution: {integrity: sha512-qZnHaNhlLRAhTV3pKTeJGvjAbGMlERhfJMViEuyP8hqJX12K1IFDLtAwGwZTflRNQd6JeB7GZMTsvMjrMVtN8w==}
+    dependencies:
+      '@daybrush/utils': 1.11.0
+      '@egjs/children-differ': 1.0.1
+      '@scena/dragscroll': 1.4.0
+      '@scena/event-emitter': 1.0.5
+      css-styled: 1.0.1(@daybrush/utils@1.11.0)
+      css-to-mat: 1.0.3
+      framework-utils: 1.1.0
+      gesto: 1.16.0
+      keycon: 1.4.0
+      overlap-area: 1.1.0
+    dev: false
 
   /semver@7.5.0:
     resolution: {integrity: sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==}
