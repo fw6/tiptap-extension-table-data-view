@@ -169,7 +169,7 @@
             if (startCell) {
                 const column = table.getColumn(startCell.dataset.columnId!)!;
                 const row = table.getRow(startCell.dataset.rowId!);
-                console.log(column.getTitle() + row.index + 1);
+                console.log(column.getTitle());
 
                 startCell.classList.add('selected');
             }

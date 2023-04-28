@@ -2,7 +2,7 @@ lockfileVersion: '6.0'
 
 patchedDependencies:
   '@tanstack/table-core@8.8.5':
-    hash: yyya4xtydp542xyrhsc3uzdud4
+    hash: 5wj4wd4zyy57eqodnchwkdzvui
     path: patches/@tanstack__table-core@8.8.5.patch
 
 dependencies:
@@ -11,7 +11,7 @@ dependencies:
     version: 2.0.0
   '@tanstack/table-core':
     specifier: ^8.8.5
-    version: 8.8.5(patch_hash=yyya4xtydp542xyrhsc3uzdud4)
+    version: 8.8.5(patch_hash=5wj4wd4zyy57eqodnchwkdzvui)
   '@tiptap/core':
     specifier: 2.0.0-beta.220
     version: 2.0.0-beta.220(@tiptap/pm@2.0.0-beta.220)
@@ -1105,7 +1105,7 @@ packages:
       - supports-color
     dev: true
 
-  /@tanstack/table-core@8.8.5(patch_hash=yyya4xtydp542xyrhsc3uzdud4):
+  /@tanstack/table-core@8.8.5(patch_hash=5wj4wd4zyy57eqodnchwkdzvui):
     resolution: {integrity: sha512-Xnwa1qxpgvSW7ozLiexmKp2PIYcLBiY/IizbdGriYCL6OOHuZ9baRhrrH51zjyz+61ly6K59rmt6AI/3RR+97Q==}
     engines: {node: '>=12'}
     dev: false

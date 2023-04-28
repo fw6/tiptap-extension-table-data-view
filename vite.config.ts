@@ -23,6 +23,9 @@ export default defineConfig({
             compiler: 'svelte',
         }),
     ],
+    optimizeDeps: {
+        exclude: ["@tanstack/table-core"],
+    },
     build: {
         target: 'es2015',
         outDir: 'dist',
