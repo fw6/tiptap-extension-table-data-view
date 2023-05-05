@@ -19,11 +19,11 @@
 
 <script lang="ts">
     import type { Editor, NodeViewProps } from '@tiptap/core'
+    import { rangeSelection } from './actions/range-selection'
     import CellStub from './components/Cell.svelte'
+    import HeaderCell from './components/HeaderCell.svelte'
     import { Ranges } from './features/ranges'
     import { Spanning } from './features/spanning'
-
-    import { rangeSelection } from './actions/range-selection'
     import { columns, dataSource } from './fixtures/mock1'
     import type { DataType, FieldConfig } from './types'
 
@@ -48,12 +48,22 @@
         columnOrder: [],
         columnVisibility: {},
         rowSelection: {},
+        columnSizingInfo: {
+            startOffset: null,
+            startSize: null,
+            deltaOffset: null,
+            deltaPercentage: null,
+            isResizingColumn: false,
+            columnSizingStart: [],
+        },
+        columnSizing: {},
     };
 
     let data = dataSource;
 
     const table = createTable<RowDataType>({
         data,
+        columnResizeMode: 'onChange',
         enablePinning: false,
         columns: columns.reduce<ColumnDef<RowDataType, CellValueType>[]>((total, col, index) => {
             const columnDef: ColumnDef<RowDataType, CellValueType> = {
@@ -63,6 +73,9 @@
                 meta: {
                     field: col,
                 },
+                size: col.size,
+                minSize: 50,
+                maxSize: 1000,
                 enablePinning: false,
             }
 
@@ -124,16 +137,12 @@
 </script>
 
 <div class="table-dataview-nodeview" class:selected bind:this={containerElementRef}>
-    <table class="inner-table" use:rangeSelection={{ table }} draggable={false}>
+    <table on:dragstart|stopPropagation|preventDefault class="inner-table" use:rangeSelection={{ table }} style:width={table.getCenterTotalSize() + 'px'}>
         <thead>
             {#each headerGroups as headerGroup}
                 <tr>
-                    {#each headerGroup.headers as header}
-                        <th colSpan={header.colSpan}>
-                            {#if !header.isPlaceholder}
-                                {header.column.columnDef.header}
-                            {/if}
-                        </th>
+                    {#each headerGroup.headers as header(header.column.id)}
+                        <HeaderCell {header} />
                     {/each}
                 </tr>
             {/each}
@@ -157,9 +166,18 @@
             outline: 1px solid cyan;
         }
 
+
         .inner-table {
+            display: block;
             width: 100%;
+            max-width: 100%;
             margin: 0;
+            white-space: nowrap;
+
+            thead {
+                position: relative;
+                z-index: 2;
+            }
         }
     }
 </style>

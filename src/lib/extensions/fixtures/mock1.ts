@@ -9,9 +9,9 @@ import { FIELD_TYPE, type DataSource, type FieldConfig } from "../types"
  * - #.3 上左合并
  */
 export const dataSource: DataSource = [
-    ['1.1', '#.1', '1999-09-09', '1.4'],
-    ['#.2', '#.3', '#.2', '2.4'],
-    ['3.1', '3.2', '2024-02-20', '#.1'],
+    ['1.1', '1', '1999-09-09', '1.4'],
+    ['#2', '3', '#3.2', '2.4'],
+    ['3.1', '3.2', '2024-02-20', '#.113'],
 ]
 
 /**
@@ -25,6 +25,7 @@ export const columns: FieldConfig[] = [
         fieldId: 'serial_1',
         fieldName: '🔢自动序号',
         type: FIELD_TYPE.AUTO_SERIAL,
+        size: 300,
         property: {
             type: 'auto_increment_number'
         },
@@ -33,11 +34,13 @@ export const columns: FieldConfig[] = [
         fieldId: 'text_1',
         fieldName: '😊文本',
         type: FIELD_TYPE.TEXT,
+        size: 300,
     },
     {
         fieldId: 'datetime_1',
         fieldName: '📅日期',
         type: FIELD_TYPE.DATETIME,
+        size: 300,
         property: {
             formatter: 'YYYY-MM-DD',
         },
@@ -46,6 +49,7 @@ export const columns: FieldConfig[] = [
         fieldId: 'number_1',
         fieldName: '🪙数字',
         type: FIELD_TYPE.NUMBER,
+        size: 300,
         property: {
             formatter: '0',
         },

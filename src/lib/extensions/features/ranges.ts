@@ -104,7 +104,7 @@ export const Ranges: TableFeature = {
             if (table.__cache.rangeSwapMap[range]) return table.__cache.rangeSwapMap[range] as string;
 
             const execArr = rangeReg.exec(range)
-            if (!execArr) throw new Error('range format error')
+            if (!execArr) throw new Error(`range format error: ${range}`)
 
             const [, startColumn, startRow, endColumn, endRow] = execArr;
 

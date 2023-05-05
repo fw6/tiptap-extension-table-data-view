@@ -42,6 +42,11 @@ export type FieldConfig = {
      * 字段名称
      */
     fieldName: string;
+
+    /**
+     * 列宽
+     */
+    size: number;
 } & (
         | {
             /**
