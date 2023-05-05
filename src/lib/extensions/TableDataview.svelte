@@ -86,6 +86,7 @@
         },
         enableRowSelection: true,
         renderFallbackValue: '',
+        getRowId: (_, idx) => idx.toString(),
         getCoreRowModel: getCoreRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
         debugTable: true,
@@ -142,9 +143,7 @@
             {#each rows as row (row.id)}
                 <tr data-row-id={row.id}>
                     {#each row.getSpanningCells() as cell (cell.id)}
-                        {#if !isInvisibleCell(cell)}
-                            <CellStub info={cell.getContext()} />
-                        {/if}
+                        <CellStub info={cell.getContext()} />
                     {/each}
                 </tr>
             {/each}

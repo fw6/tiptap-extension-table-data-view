@@ -50,7 +50,7 @@
     }
 </script>
 
-<td class="cell-stub" class:range-anchor={info.cell.getIsRangeAnchor()} class:range-last={info.cell.getIsRangeLast()} class:range-covered={info.cell.getIsInRange()} class:active={info.cell.getIsInRange()} data-cell-title={info.cell.getTitle()} data-cell-id={info.cell.id} data-row-id={info.row.id} data-column-id={info.column.id}>
+<td class="cell-stub" rowspan={info.cell.rowSpan} colspan={info.cell.colSpan} class:range-anchor={info.cell.getIsRangeAnchor()} class:range-last={info.cell.getIsRangeLast()} class:range-covered={info.cell.getIsInRange()} class:active={info.cell.getIsInRange()} data-cell-title={info.cell.getTitle()} data-cell-id={info.cell.id} data-row-id={info.row.id} data-column-id={info.column.id}>
     <svelte:component this={component} {info} editing={info.cell.getIsEditingRangeAnchor()} />
     {#if info.cell.getIsRangeLast()}
         <span class="cell-last-cornor" transition:fade={{delay: 50, duration: 100}} />
