@@ -28,6 +28,7 @@
         "noImplicitThis": true,
         "noFallthroughCasesInSwitch": true,
         "types": [
+            "node",
             "svelte",
             "vite/client"
         ]

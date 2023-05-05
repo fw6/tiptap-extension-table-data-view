@@ -1,40 +1,29 @@
 <script lang="ts" context="module">
-    import { createTable, getCoreRowModel, getFacetedUniqueValues, type Cell, type ColumnDef, type RowData, type RowSelectionState } from '@tanstack/table-core'
+    import { createTable, getCoreRowModel, getFacetedUniqueValues, type Cell, type ColumnDef, type Row, type RowData, type TableState } from '@tanstack/table-core'
 
     declare module '@tanstack/table-core' {
         type CellSelectionState = Record<string, true>
 
-        interface ColumnMeta<TData extends RowData, TValue> {
-            field: FieldConfig
+        interface TableMeta<TData extends RowData> {
+            updateData: (rowIndex: number, colIndex: number, value: DataType) => void
+
+            // TODO
+            // updateColumns: (colIndex: number, value: FieldConfig) => void
         }
 
-        interface TableState {
-            /**
-             * contains all selected cell Ids except current selecting range, once current selecting range is finished it moves to selectedCellIds
-             */
-            selectedCellIds: CellSelectionState
-            /**
-             * contains cell Ids of currently selecting range. It is a state when user is currently performing range selection
-             */
-            currentSelectedCellIds: CellSelectionState
-            /**
-             * State which tells whether user is performing range selection
-             */
-            isSelectingCells: boolean
+        interface ColumnMeta<TData extends RowData, TValue> {
+            field: FieldConfig
         }
     }
 </script>
 
 <script lang="ts">
     import type { Editor, NodeViewProps } from '@tiptap/core'
-    import { debounce } from 'lodash-es'
-// import Selecto from 'selecto'
-
     import CellStub from './components/Cell.svelte'
-    import { Range as RangeFeature } from './features/range-selection'
+    import { Ranges } from './features/ranges'
+    import { Spanning } from './features/spanning'
 
-    import { onMount } from 'svelte'
-    import type { Action } from 'svelte/action'
+    import { rangeSelection } from './actions/range-selection'
     import { columns, dataSource } from './fixtures/mock1'
     import type { DataType, FieldConfig } from './types'
 
@@ -51,10 +40,20 @@
         return containerElementRef
     }
 
-    let rowSelection: RowSelectionState = {}
+    let tableState: Partial<TableState> = {
+        ranges: ['A1:A1'],
+        rangeAnchor: 'A1',
 
-    let table = createTable({
-        data: dataSource,
+        columnPinning: {},
+        columnOrder: [],
+        columnVisibility: {},
+        rowSelection: {},
+    };
+
+    let data = dataSource;
+
+    const table = createTable<RowDataType>({
+        data,
         enablePinning: false,
         columns: columns.reduce<ColumnDef<RowDataType, CellValueType>[]>((total, col, index) => {
             const columnDef: ColumnDef<RowDataType, CellValueType> = {
@@ -64,50 +63,56 @@
                 meta: {
                     field: col,
                 },
-                // cell: (info) => {
-                //     return info.getValue()
-                // },
                 enablePinning: false,
             }
 
             total.push(columnDef)
             return total
         }, []),
-        state: {
-            selectedCellIds: {},
-            currentSelectedCellIds: {},
-            isSelectingCells: false,
-            columnPinning: {},
-            columnOrder: [],
-            columnVisibility: {},
-            rowSelection,
+        state: tableState,
+        onStateChange: (updater: any) => {
+            if (updater instanceof Function) {
+                tableState = updater(tableState)
+            } else tableState = updater;
+
+            table.setOptions(prev => ({
+                ...prev,
+                state: tableState,
+            }));
+
+            // rerender
+            rows = table.getRowModel().rows;
+            headerGroups = table.getHeaderGroups();
         },
         enableRowSelection: true,
-        onRowSelectionChange: (updater) => {
-            if (typeof updater === 'function') {
-                rowSelection = updater(rowSelection)
-            } else rowSelection = updater
-        },
         renderFallbackValue: '',
-        onStateChange: () => {
-            console.log('onStateChange')
-        },
         getCoreRowModel: getCoreRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
         debugTable: true,
         debugHeaders: true,
         debugColumns: true,
         features: [
-            RangeFeature,
+            Ranges,
+            Spanning,
         ],
+
+        meta: {
+            updateData(rowIndex, colIndex, value) {
+                data = data.map((row, index) => {
+                    if (index === rowIndex) {
+                        row[colIndex] = value
+                    }
+                    return row
+                })
+            },
+        },
     })
 
-    $: {
-        console.log('rowSelection:', rowSelection)
-    }
+    let rows = table.getRowModel().rows;
+    let headerGroups = table.getHeaderGroups();
 
-    const isInvisibleCell = (cell: Cell<RowDataType, CellValueType>) => {
-        const value = cell.getValue()
+    const isInvisibleCell = (cell: Cell<RowDataType, unknown>) => {
+        const value = cell.getValue() as CellValueType;
         if (typeof value === 'string' && ['#.1', '#.2', '#.3'].includes(value)) {
             // 行列被合并单元格，不显示
             return true
@@ -115,98 +120,12 @@
 
         return false
     }
-
-    onMount(() => {
-        // const selecto = new Selecto({
-        //     keyContainer: containerElementRef,
-        //     dragContainer: containerElementRef,
-        //     selectableTargets: [
-        //         () => [...containerElementRef.querySelectorAll<HTMLTableCellElement>('table tbody tr td')]
-        //     ],
-        //     hitRate: 0,
-        //     selectByClick: true,
-        //     selectFromInside: true,
-        //     continueSelect: false,
-        //     continueSelectWithoutDeselect: true,
-        //     toggleContinueSelect: 'shift',
-        //     toggleContinueSelectWithoutDeselect: [['ctrl', 'meta']],
-        //     ratio: 0,
-        // })
-        // selecto.on('select', (e) => {
-        //     e.added.forEach((el, i) => {
-        //         el.classList.add('selected')
-        //         if (i === 0) el.classList.add('selected-first')
-        //     })
-        //     e.removed.forEach((el) => {
-        //         el.classList.remove('selected')
-        //         el.classList.remove('selected-first')
-        //     })
-        // });
-    })
-
-    const events: Action<HTMLTableElement> = (tableEle) => {
-        let selecting = false;
-        console.log(table._features);
-        const findClosestCell = (target: Element) => {
-            if (target.tagName === 'TD') return target as HTMLTableCellElement
-            return target.closest('td')
-        }
-
-        const clearSelection = () => {
-            tableEle.querySelectorAll('td.selected').forEach((el) => {
-                el.classList.remove('selected')
-                el.classList.remove('selected-first')
-            })
-        }
-
-        const handleMousedown = (e: MouseEvent) => {
-            clearSelection();
-            selecting = true;
-            const startElement = document.elementFromPoint(e.x, e.y);
-            const startCell = startElement && findClosestCell(startElement);
-            console.log('start:', startCell);
-
-            if (startCell) {
-                const column = table.getColumn(startCell.dataset.columnId!)!;
-                const row = table.getRow(startCell.dataset.rowId!);
-                console.log(column.getTitle());
-
-                startCell.classList.add('selected');
-            }
-        }
-        const handleMouseup = (e: MouseEvent) => {
-            selecting = false;
-            const endElement = document.elementFromPoint(e.x, e.y);
-            const endCell = endElement && findClosestCell(endElement);
-            console.log('end:', endCell);
-            if (endCell) endCell.classList.toggle('selected');
-        }
-        const handleMousemove = debounce((e: MouseEvent) => {
-            if (!selecting) return;
-            const endElement = document.elementFromPoint(e.x, e.y);
-            const endCell = endElement && findClosestCell(endElement);
-            console.log('move:', endCell);
-            if (endCell) endCell.classList.toggle('selected');
-        }, 100)
-
-        tableEle.addEventListener('mousedown', handleMousedown);
-        tableEle.addEventListener('mousemove', handleMousemove);
-        tableEle.addEventListener('mouseup', handleMouseup);
-
-        return {
-            destroy() {
-                tableEle.removeEventListener('mousedown', handleMousedown);
-                tableEle.removeEventListener('mousemove', handleMousemove);
-                tableEle.removeEventListener('mouseup', handleMouseup);
-            },
-        }
-    };
 </script>
 
 <div class="table-dataview-nodeview" class:selected bind:this={containerElementRef}>
-    <table class="inner-table" use:events draggable={false}>
+    <table class="inner-table" use:rangeSelection={{ table }} draggable={false}>
         <thead>
-            {#each table.getHeaderGroups() as headerGroup}
+            {#each headerGroups as headerGroup}
                 <tr>
                     {#each headerGroup.headers as header}
                         <th colSpan={header.colSpan}>
@@ -220,9 +139,9 @@
         </thead>
 
         <tbody>
-            {#each table.getRowModel().rows as row (row.id)}
-                <tr data-row-id={row.id} class:selected={rowSelection[row.index]}>
-                    {#each row.getVisibleCells() as cell (cell.id)}
+            {#each rows as row (row.id)}
+                <tr data-row-id={row.id}>
+                    {#each row.getSpanningCells() as cell (cell.id)}
                         {#if !isInvisibleCell(cell)}
                             <CellStub info={cell.getContext()} />
                         {/if}
@@ -242,12 +161,6 @@
         .inner-table {
             width: 100%;
             margin: 0;
-
-            tbody {
-                tr.selected {
-                    background-color: red;
-                }
-            }
         }
     }
 </style>

@@ -20,6 +20,9 @@ const config = {
             configFilePath: 'postcss.config.cjs',
         }),
     ],
+    compilerOptions: {
+        dev: true,
+    },
 
     kit: {
         // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.

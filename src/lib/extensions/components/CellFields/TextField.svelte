@@ -36,5 +36,6 @@
         font-size: inherit;
         font-family: inherit;
         background-color: transparent;
+        caret-color: blue;
     }
 </style>

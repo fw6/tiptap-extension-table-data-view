@@ -182,6 +182,9 @@ devDependencies:
   '@types/lodash-es':
     specifier: ^4.17.7
     version: 4.17.7
+  '@types/node':
+    specifier: ^18.16.3
+    version: 18.16.3
   '@types/postcss-mixins':
     specifier: ^9.0.0
     version: 9.0.0
@@ -277,7 +280,7 @@ devDependencies:
     version: 0.16.1
   vite:
     specifier: ^4.2.0
-    version: 4.2.0
+    version: 4.2.0(@types/node@18.16.3)
 
 packages:
 
@@ -1065,7 +1068,7 @@ packages:
       svelte: 3.54.0
       tiny-glob: 0.2.9
       undici: 5.18.0
-      vite: 4.2.0
+      vite: 4.2.0(@types/node@18.16.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1099,7 +1102,7 @@ packages:
       magic-string: 0.30.0
       svelte: 3.54.0
       svelte-hmr: 0.15.1(svelte@3.54.0)
-      vite: 4.2.0
+      vite: 4.2.0(@types/node@18.16.3)
       vitefu: 0.2.4(vite@4.2.0)
     transitivePeerDependencies:
       - supports-color
@@ -1544,6 +1547,10 @@ packages:
 
   /@types/lodash@4.14.194:
     resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
+    dev: true
+
+  /@types/node@18.16.3:
+    resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==}
     dev: true
 
   /@types/object.omit@3.0.0:
@@ -4325,7 +4332,7 @@ packages:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
     dev: true
 
-  /vite@4.2.0:
+  /vite@4.2.0(@types/node@18.16.3):
     resolution: {integrity: sha512-AbDTyzzwuKoRtMIRLGNxhLRuv1FpRgdIw+1y6AQG73Q5+vtecmvzKo/yk8X/vrHDpETRTx01ABijqUHIzBXi0g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4350,6 +4357,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.16.3
       esbuild: 0.17.18
       postcss: 8.4.23
       resolve: 1.22.3
@@ -4366,7 +4374,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.2.0
+      vite: 4.2.0(@types/node@18.16.3)
     dev: true
 
   /w3c-keyname@2.2.6:
